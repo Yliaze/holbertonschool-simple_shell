@@ -1,3 +1,3 @@
 Project C - Simple Shell
 
-Authors: Benjamin Alazet, Axel Malka
+Authors: Benjamin Alazet, Axel Malka 
