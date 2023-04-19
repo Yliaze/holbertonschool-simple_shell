@@ -92,6 +92,17 @@ char *clear_line(char *str)
 	return (str);
 }
 
+void free_all(char **tok, char *line)
+{
+	int i = 0;
+	while (tok[i])
+	{
+		free(tok[i]);
+		i++;
+	}
+	free(tok);
+	free(line);
+}
 int main(void)
 {
 	char delims[] = " ", *line = NULL, **tok;
@@ -119,14 +130,9 @@ int main(void)
 		else if (child_pid > 0)
 		{
 			wait(&status);
-			while (tok[i])
-			{
-				free(tok[i]);
-				i++;
-			}
-			tok[i];
-			free(tok);
+			
 			printf("$ ");
 		}
 	}
+	free_all(tok, line);
 }
