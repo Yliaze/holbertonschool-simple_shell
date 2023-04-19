@@ -130,7 +130,7 @@ int main(void)
 		else if (child_pid > 0)
 		{
 			wait(&status);
-			
+			free_all(tok, line);
 			printf("$ ");
 		}
 	}
