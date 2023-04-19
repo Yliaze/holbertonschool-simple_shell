@@ -102,10 +102,11 @@ void free_all(char **tok, char *line)
 	free(tok);
 	free(line);
 }
+
 int main(__attribute__((unused)) int ac, __attribute__((unused)) char ** av, char **envp)
 {
 	char delims[] = " ", *line = NULL, **tok;
-	int status;
+	int status, i;
 	size_t len = 0;
 	pid_t child_pid = 0;
 	struct stat st;
@@ -136,6 +137,13 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char ** av, cha
 		else if (child_pid > 0)
 		{
 			wait(&status);
+			i = 0;
+			while (tok[i])
+			{
+				free(tok[i]);
+				i++;
+			}
+			free(tok);
 			/*printf("$ ");*/
 		}
 	}
