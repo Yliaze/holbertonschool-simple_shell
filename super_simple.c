@@ -103,9 +103,10 @@ void free_all(char **tok, char *line)
 	free(tok);
 	free(line);
 }
-int main(void)
+int main(__attribute__((unused)) int ac, __attribute__((unused)) char ** av, char **envp)
 {
 	char delims[] = " ", *line = NULL, **tok;
+	char *which[] = {"bin/which", "ls", NULL};
 	int status, i = 0;
 	size_t len = 0;
 	pid_t child_pid = 0;
@@ -120,30 +121,20 @@ int main(void)
 		child_pid = fork();
 
 		if (child_pid == -1)
-			return (0);
+			return (EXIT_FAILURE);
 
 		else if (child_pid == 0)
 		{
-			if (stat(tok[0], &st) == 0)
-			{
 				if (execve(tok[0], tok, NULL) == -1)
-				return (0);
-			}
-			else
-			{
-				printf("NOT FOUND\n");
-				return (0);
-			}
-			
+					return (0);
 		}
 
 		else if (child_pid > 0)
 		{
 			wait(&status);
-			//free_all(tok, line);
 			printf("$ ");
 		}
 	}
-		free_all(tok, line);
+	free_all(tok, line);
 	return (EXIT_SUCCESS);
 }
