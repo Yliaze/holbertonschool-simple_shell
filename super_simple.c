@@ -109,6 +109,7 @@ int main(void)
 	int status, i = 0;
 	size_t len = 0;
 	pid_t child_pid = 0;
+	struct stat st;
 
 	printf("$ ");
 	while (getline(&line, &len, stdin))
@@ -123,16 +124,26 @@ int main(void)
 
 		else if (child_pid == 0)
 		{
-			if (execve(tok[0], tok, NULL) == -1)
+			if (stat(tok[0], &st) == 0)
+			{
+				if (execve(tok[0], tok, NULL) == -1)
 				return (0);
+			}
+			else
+			{
+				printf("NOT FOUND\n");
+				return (0);
+			}
+			
 		}
 
 		else if (child_pid > 0)
 		{
 			wait(&status);
-			free_all(tok, line);
+			//free_all(tok, line);
 			printf("$ ");
 		}
 	}
-	free_all(tok, line);
+		free_all(tok, line);
+	return (EXIT_SUCCESS);
 }
