@@ -112,7 +112,7 @@ int main(void)
 	struct stat st;
 
 	printf("$ ");
-	while (getline(&line, &len, stdin))
+	while (getline(&line, &len, stdin) > 0)
 	{
 		clear_line(line);
 		tok = cut_string(line, delims, nb_token(line, delims));
