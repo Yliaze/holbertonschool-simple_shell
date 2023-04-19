@@ -143,10 +143,10 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char ** av, cha
 				free(tok[i]);
 				i++;
 			}
-			free(tok);
 			/*printf("$ ");*/
 		}
+		free(tok);
 	}
-	free_all(tok, line);
+	free(line);
 	return (EXIT_SUCCESS);
 }
