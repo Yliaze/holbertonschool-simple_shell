@@ -22,10 +22,10 @@ char *_strcpy(char *dest, char *src)
 
 /**
  * cut_string - split a string at each delimiters
- * @str: the string 
+ * @str: the string
  * @delims: separator of each tokens
  * @nb_token: the number of token
- * Return: array of strings 
+ * Return: array of strings
  */
 char **cut_string(char *str, char *delims, int nb_token)
 {
@@ -35,7 +35,7 @@ char **cut_string(char *str, char *delims, int nb_token)
 	int size1 = strlen(str);
 
 	dest = malloc(sizeof(char *) * (nb_token + 1));
-	
+
 	res = strtok(str, delims);
 	while (res != NULL)
 	{
@@ -51,9 +51,9 @@ char **cut_string(char *str, char *delims, int nb_token)
 
 /**
  * nb_token - count the number of token
- * @str: the string 
+ * @str: the string
  * @delims: separator of each tokens
- * Return: the number of token 
+ * Return: the number of token
  */
 int nb_token(char *str, char *delims)
 {
@@ -76,7 +76,7 @@ int nb_token(char *str, char *delims)
 
 /**
  * clear_line - remove the new line at the end of a string
- * @str: the string to clear 
+ * @str: the string to clear
  * Return: the string without '\n'
  */
 char *clear_line(char *str)
@@ -100,10 +100,11 @@ int main(void)
 	pid_t child_pid = 0;
 
 	printf("$ ");
-	while(getline(&line, &len, stdin))
+	while (getline(&line, &len, stdin))
 	{
-		tok = cut_string(clearline(line), delims, nb_token(line, delims));
-		
+		clear_line(line);
+		tok = cut_string(line, delims, nb_token(line, delims));
+
 		child_pid = fork();
 
 		if (child_pid == -1)
@@ -118,11 +119,12 @@ int main(void)
 		else if (child_pid > 0)
 		{
 			wait(&status);
-			while(tok[i])
+			while (tok[i])
 			{
 				free(tok[i]);
 				i++;
 			}
+			tok[i];
 			free(tok);
 			printf("$ ");
 		}
