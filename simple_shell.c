@@ -102,14 +102,15 @@ void free_all(char **tok, char *line)
 	free(tok);
 	free(line);
 }
-int main(__attribute__((unused)) int ac, __attribute__((unused)) char ** av, __attribute__((unused)) char **envp)
+int main(__attribute__((unused)) int ac, __attribute__((unused)) char ** av, char **envp)
 {
 	char delims[] = " ", *line = NULL, **tok;
 	int status;
 	size_t len = 0;
 	pid_t child_pid = 0;
+	struct stat st;
 
-	printf("$ ");
+	/*printf("$ ")*/
 	while (getline(&line, &len, stdin) > 0)
 	{
 		clear_line(line);
@@ -121,15 +122,21 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char ** av, __a
 			return (EXIT_FAILURE);
 
 		else if (child_pid == 0)
-		{
-				if (execve(tok[0], tok, NULL) == -1)
-					return (0);
+		{	
+			if (!stat(tok[0], &st))
+			{
+				execve(tok[0], tok, envp);
+			}
+			else
+			{
+				printf("No such file or directory\n");
+			}
 		}
 
 		else if (child_pid > 0)
 		{
 			wait(&status);
-			printf("$ ");
+			/*printf("$ ");*/
 		}
 	}
 	free_all(tok, line);
