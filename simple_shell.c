@@ -58,20 +58,28 @@ int nb_token(char *str, char *delims)
 {
 	int i = 0, y = 0, nb_token = 0;
 
+	if (!str)
+		return (0);
+	
+	while (delims[y])
+	{
+		if(delims[y] != str[0])
+			nb_token = 1;
+		y++;
+	}
+
 	while (str[i])
 	{
 		y = 0;
 		while (delims[y])
 		{
 			if (str[i] == delims[y] && str[i + 1] != delims[y] && str[i + 1] != '\0')
-				nb_token++;
+			nb_token++; 
 
 			y++;
 		}
 		i++;
 	}
-	if (nb_token)
-		nb_token++;
 	return (nb_token);
 }
 
@@ -122,7 +130,6 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, char
 		{
 
 			tok = cut_string(line, delims, a);
-
 			child_pid = fork();
 
 			if (child_pid == -1)
