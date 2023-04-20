@@ -17,6 +17,7 @@ int nb_token(char *str, char *delims);
 char *get_path(char **envp);
 char **clear_path(char *path);
 char *check_for_func(char *cmd, char **envp);
+void _exec(char **av, char **envp);
 
 
 #endif

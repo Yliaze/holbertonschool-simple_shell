@@ -20,6 +20,7 @@ char *_strcat(char *s1, char *s2)
 	}
 	i = 0;
 	new_str[y] = '/';
+	y++;
 	while (s2[i])
 	{
 		new_str[y] = s2[i];
@@ -27,7 +28,6 @@ char *_strcat(char *s1, char *s2)
 		y++;
 	}
 	new_str[y] = '\0';
-	
 	return (new_str);
 }
 

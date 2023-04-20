@@ -27,15 +27,15 @@ char **clear_path(char *path)
 }
 char *check_for_func(char *cmd, char **envp)
 {
-	char *path = malloc (1204);
+	char *path = NULL;
 	struct stat st;
 	int i = 0;
 
 	while (envp[i])
 	{
-		path = _strcat(path, cmd);
-		printf("%s \n", path);
 
+		path = _strcat(envp[i], cmd);
+		printf("envp[%d] = %s\n", i, envp[i]);
 		if(!stat(path, &st))
 		{
 			return (path);
