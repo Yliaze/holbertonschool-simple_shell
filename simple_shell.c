@@ -128,7 +128,6 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, char
 		a = nb_token(line, delims);
 		if (a)
 		{
-
 			tok = cut_string(line, delims, a);
 			child_pid = fork();
 
