@@ -70,7 +70,6 @@ int nb_token(char *str, char *delims)
 		}
 		i++;
 	}
-	printf("nb_token = %d", nb_token);
 	return (nb_token);
 }
 
