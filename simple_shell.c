@@ -56,20 +56,22 @@ char **cut_string(char *str, char *delims, int nb_token)
  */
 int nb_token(char *str, char *delims)
 {
-	int i = 0, y = 0, nb_token = 1;
+	int i = 0, y = 0, nb_token = 0;
 
 	while (str[i])
 	{
 		y = 0;
 		while (delims[y])
 		{
-			if (str[i] == delims[y] && str[i+1] != delims[y] && str[i+1] != '\0')
+			if (str[i] == delims[y] && str[i + 1] != delims[y] && str[i + 1] != '\0')
 				nb_token++;
 
 			y++;
 		}
 		i++;
 	}
+	if (nb_token)
+		nb_token++;
 	return (nb_token);
 }
 
@@ -103,10 +105,10 @@ void free_all(char **tok, char *line)
 	free(line);
 }
 
-int main(__attribute__((unused)) int ac, __attribute__((unused)) char ** av, char **envp)
+int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, char **envp)
 {
 	char delims[] = " ", *line = NULL, **tok;
-	int status, i;
+	int status, i, a = 0;
 	size_t len = 0;
 	pid_t child_pid = 0;
 	struct stat st;
@@ -115,37 +117,42 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char ** av, cha
 	while (getline(&line, &len, stdin) > 0)
 	{
 		clear_line(line);
-		tok = cut_string(line, delims, nb_token(line, delims));
-
-		child_pid = fork();
-
-		if (child_pid == -1)
-			return (EXIT_FAILURE);
-
-		else if (child_pid == 0)
-		{	
-			if (!stat(tok[0], &st))
-			{
-				execve(tok[0], tok, envp);
-			}
-			else
-			{
-				return (0);
-			}
-		}
-
-		else if (child_pid > 0)
+		a = nb_token(line, delims);
+		if (a)
 		{
-			wait(&status);
-			i = 0;
-			while (tok[i])
+
+			tok = cut_string(line, delims, a);
+
+			child_pid = fork();
+
+			if (child_pid == -1)
+				return (EXIT_FAILURE);
+
+			else if (child_pid == 0)
 			{
-				free(tok[i]);
-				i++;
+				if (!stat(tok[0], &st))
+				{
+					execve(tok[0], tok, envp);
+				}
+				else
+				{
+					return (0);
+				}
 			}
-			/*printf("$ ");*/
+
+			else if (child_pid > 0)
+			{
+				wait(&status);
+				i = 0;
+				while (tok[i])
+				{
+					free(tok[i]);
+					i++;
+				}
+				/*printf("$ ");*/
+			}
+			free(tok);
 		}
-		free(tok);
 	}
 	free(line);
 	return (EXIT_SUCCESS);
