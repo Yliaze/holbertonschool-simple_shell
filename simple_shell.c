@@ -130,7 +130,7 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char ** av, cha
 			}
 			else
 			{
-				printf("No such file or directory\n");
+				return (0);
 			}
 		}
 
