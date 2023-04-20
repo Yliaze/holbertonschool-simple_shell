@@ -63,13 +63,14 @@ int nb_token(char *str, char *delims)
 		y = 0;
 		while (delims[y])
 		{
-			if (str[i] == delims[y])
+			if (str[i] == delims[y] && str[i+1] != delims[y] && str[i+1] != '\0')
 				nb_token++;
 
 			y++;
 		}
 		i++;
 	}
+	printf("nb_token = %d", nb_token);
 	return (nb_token);
 }
 
