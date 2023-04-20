@@ -38,6 +38,7 @@ char *check_for_func(char *cmd, char **envp)
 		printf("envp[%d] = %s\n", i, envp[i]);
 		if(!stat(path, &st))
 		{
+			cmd = realloc(cmd, sizeof(cmd) + sizeof(path) + 1);
 			return (path);
 		}
 		i++;
