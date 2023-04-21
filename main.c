@@ -7,7 +7,7 @@ int main(void)
 	size_t len = 0;
 	pid_t child_pid = 0;
 	struct stat st;
-	env = _gentenv("PATH");
+	//env = _gentenv("PATH");
 	
 	while (getline(&line, &len, stdin) > 0)
 	{
