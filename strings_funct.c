@@ -52,18 +52,18 @@ char *_strcpy(char *dest, char *src)
  * @nb_token: the number of token
  * Return: array of strings
  */
-char **cut_string(char *str, char *delims, int nb_token)
+char *cut_string(char *str, char *delims, int nb_token)
 {
 	int i = 0;
-	char **dest = NULL;
+	char *dest[1024];
 	char *res = NULL;
 
-	dest = malloc(sizeof(char *) * (nb_token + 1));
+	
 
 	res = strtok(str, delims);
 	while (res != NULL)
 	{
-		dest[i] = malloc(sizeof(char) * (strlen(res) + 1));
+		
 		_strcpy(dest[i], res);
 		res = strtok(NULL, delims);
 		i++;

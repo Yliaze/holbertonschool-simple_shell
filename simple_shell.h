@@ -9,15 +9,16 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
-char **cut_string(char *str, char *delims, int nb_token);
+extern char **environ;
+
+char *cut_string(char *str, char *delims, int nb_token);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *s1, char *s2);
 char *clear_line(char *str);
 int nb_token(char *str, char *delims);
-char *get_path(char **envp);
-char **clear_path(char *path);
-char *check_for_func(char *cmd, char **envp);
-void _exec(char **av, char **envp);
+char *_gentenv(const char *name);
+char getpath(char *path, char *cmd);
+void _exec(char *av);
 
 
 #endif

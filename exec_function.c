@@ -1,6 +1,6 @@
 #include "simple_shell.h"
 
-void _exec(char **av, char **envp)
+void _exec(char *av)
 {
 	int child_pid, i = 0, status;
 
@@ -10,15 +10,10 @@ void _exec(char **av, char **envp)
 		exit (EXIT_FAILURE);
 
 	else if (child_pid == 0)
-		execve(av[0], av, envp);
+		execve(av[0], av, environ);
 
 	else
 	{
 		wait(&status);
-		while (av[i])
-		{
-			free(av[i]);
-			i++;
-		}
 	}
 }

@@ -1,47 +1,33 @@
 #include "simple_shell.h"
 
-char *get_path(char **envp)
+char *_gentenv(const char *name)
 {
-	const char PATH[5] = "PATH";
-
-	for (int i = 0; envp[i]; i++)
+	for (int i = 0; environ[i]; i++)
 	{
-		if (strncmp(envp[i], PATH, 4) == 0)
-			return (envp[i]);
+		if (strncmp(environ[i], name, 4) == 0)
+			return (environ[i]);
 	}
 	return (0);
 }
 
-char **clear_path(char *path)
+char getpath(char *path, char *cmd)
 {
-	char **new_path = NULL;
 	const char EQUAL[2] = "=";
 	char COLUMN[2] = ":";
 	int nb = 0;
+	struct stat st;
 
 	path = strtok(path, EQUAL);
 	path = strtok(NULL, EQUAL);
-	nb = nb_token(path, COLUMN);
-	new_path = cut_string(path, COLUMN, nb);
-	return (new_path);
-}
-char *check_for_func(char *cmd, char **envp)
-{
-	char *path = NULL;
-	struct stat st;
-	int i = 0;
+	path = strtok(path, COLUMN);
 
-	while (envp[i])
+	while (path)
 	{
-
-		path = _strcat(envp[i], cmd);
-		printf("envp[%d] = %s\n", i, envp[i]);
-		if(!stat(path, &st))
-		{
-			cmd = realloc(cmd, sizeof(cmd) + sizeof(path) + 1);
+		path = _strcat(path, cmd);
+		if (!stat(path, &st))
 			return (path);
-		}
-		i++;
+		else
+			path = strtok(NULL, COLUMN);
 	}
-	return (NULL);
+	return (path);
 }
