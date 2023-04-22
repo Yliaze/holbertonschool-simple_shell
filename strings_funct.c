@@ -8,10 +8,15 @@
  */
 char *_strcat(char *s1, char *s2)
 {
-	char *new_str = NULL;
+	char *new_str;
 	int i = 0, y = 0;
 
-	new_str = malloc (sizeof(s1) + sizeof(s2) + 2);
+	new_str = calloc (sizeof(s1),  sizeof(s2) + 2);
+		if(!new_str)
+		{
+			printf("je sais pas faire un malloc \n");
+			return (0);
+		}
 	while (s1[i])
 	{
 		new_str[y] = s1[i];
@@ -52,23 +57,13 @@ char *_strcpy(char *dest, char *src)
  * @nb_token: the number of token
  * Return: array of strings
  */
-char *cut_string(char *str, char *delims, int nb_token)
+void cut_string(char *str, char *delims, char **av)
 {
-	int i = 0;
-	char *dest[1024];
-	char *res = NULL;
+	int i = 1;
 
-	
-
-	res = strtok(str, delims);
-	while (res != NULL)
+	av[0] = strtok(str, delims);
+	for (; str; i++)
 	{
-		
-		_strcpy(dest[i], res);
-		res = strtok(NULL, delims);
-		i++;
+		av[i] = strtok(NULL, delims);
 	}
-	dest[i] = ((char *)NULL);
-
-	return (dest);
 }

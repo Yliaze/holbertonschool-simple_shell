@@ -1,6 +1,6 @@
 #include "simple_shell.h"
 
-void _exec(char *av)
+void _exec(char **av)
 {
 	int child_pid, i = 0, status;
 

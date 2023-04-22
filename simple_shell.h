@@ -11,14 +11,14 @@
 
 extern char **environ;
 
-char *cut_string(char *str, char *delims, int nb_token);
+void cut_string(char *str, char *delims, char **av);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *s1, char *s2);
 char *clear_line(char *str);
 int nb_token(char *str, char *delims);
 char *_gentenv(const char *name);
-char getpath(char *path, char *cmd);
-void _exec(char *av);
+char *_which(char *path, char *cmd);
+void _exec(char **av);
 
 
 #endif

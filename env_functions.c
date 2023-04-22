@@ -2,32 +2,38 @@
 
 char *_gentenv(const char *name)
 {
+	char 
 	for (int i = 0; environ[i]; i++)
 	{
 		if (strncmp(environ[i], name, 4) == 0)
+		{
+			strtok
 			return (environ[i]);
+		}
 	}
 	return (0);
 }
 
-char getpath(char *path, char *cmd)
+char *_which(char *path, char *cmd)
 {
-	const char EQUAL[2] = "=";
-	char COLUMN[2] = ":";
-	int nb = 0;
+	int nb = 0, i;
 	struct stat st;
+	char *path_and_cmd = NULL, *buff = NULL, COLUMN[] = ":";
 
-	path = strtok(path, EQUAL);
-	path = strtok(NULL, EQUAL);
-	path = strtok(path, COLUMN);
+	path_and_cmd = strdup(path);
+	nb = nb_token(buff, COLUMN);
+	buff = strtok(path_and_cmd, COLUMN);
 
-	while (path)
+	for (i = 0; i < nb; i++)
 	{
-		path = _strcat(path, cmd);
-		if (!stat(path, &st))
-			return (path);
-		else
-			path = strtok(NULL, COLUMN);
+		path_and_cmd = _strcat(buff, cmd);
+		if (stat(path_and_cmd, &st) == 0)
+		{
+			free (buff);
+			return (path_and_cmd);
+		}
+		buff = strtok(NULL, COLUMN);
 	}
-	return (path);
+
+	return (NULL);
 }
