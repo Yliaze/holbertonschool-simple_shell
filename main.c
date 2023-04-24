@@ -6,6 +6,7 @@ int main(void)
 	int a = 0, i;
 	size_t len = 0;
 	char *quelquechose;
+	struct stat st;
 
 	env = _gentenv("PATH");
 	quelquechose = strdup(env);
@@ -18,16 +19,21 @@ int main(void)
 
 		for (i = 1; i < a; i++)
 			av[i] = strtok(NULL, delims);
-		av[0] = _which(quelquechose, av[0]);
-		if (av[0] == NULL)
+
+		if (stat(av[0], &st) == 0)
 		{
-			free(quelquechose);
+			_exec(av);
 		}
 		else
 		{
+			av[0] = _which(quelquechose, av[0]);
+			if (av[0] != NULL)
+			{
+				_exec(av);
+				free(av[0]);
+			}
 			free(quelquechose);
 			quelquechose = strdup(env);
-			_exec(av);
 		}
 	}
 	free(line);

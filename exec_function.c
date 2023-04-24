@@ -20,6 +20,5 @@ void _exec(char **av)
 	else
 	{
 		wait(&status);
-		free(av[0]);
 	}
 }
