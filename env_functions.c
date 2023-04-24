@@ -9,16 +9,20 @@
 char *_gentenv(const char *name)
 {
 	int i;
-	for (i = 0; environ[i]; i++)
+
+	if (environ)
 	{
-		if (strncmp(environ[i], name, 4) == 0)
+		for (i = 0; environ[i]; i++)
 		{
-			strtok(environ[i], "=");
-			environ[i] = strtok(NULL, "=");
-			return (environ[i]);
+			if (strncmp(environ[i], name, 4) == 0)
+			{
+				environ[i] = strtok(environ[i], "=");
+				environ[i] = strtok(NULL, "=");
+				return (environ[i]);
+			}
 		}
 	}
-	return (0);
+	return (NULL);
 }
 
 /**
@@ -33,13 +37,18 @@ char *_which(char *path, char *cmd)
 	int nb = 0, i;
 	struct stat st;
 	char *buff = NULL, COLUMN[] = ":";
-	
+
 	nb = nb_token(path, COLUMN);
 	buff = strtok(path, COLUMN);
 
 	for (i = 0; i < nb; i++)
 	{
 		path = _strcat(buff, cmd);
+		if (path == NULL)
+		{
+
+			return (NULL);
+		}
 		if (stat(path, &st) == 0)
 		{
 			return (path);
@@ -47,6 +56,6 @@ char *_which(char *path, char *cmd)
 		free(path);
 		buff = strtok(NULL, COLUMN);
 	}
-	printf("%s: not found\n");
+	printf("%s: not found\n", cmd);
 	return (NULL);
 }

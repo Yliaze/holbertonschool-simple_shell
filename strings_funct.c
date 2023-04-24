@@ -16,6 +16,7 @@ char *_strcat(char *s1, char *s2)
     if (result == NULL) {
         exit(1);
     }
+
     strcpy(result, s1);
     strcat(result, "/");
     strcat(result, s2);
