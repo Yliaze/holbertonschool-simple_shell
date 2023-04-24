@@ -47,6 +47,6 @@ char *_which(char *path, char *cmd)
 		free(path);
 		buff = strtok(NULL, COLUMN);
 	}
-
+	printf("%s: not found\n");
 	return (NULL);
 }

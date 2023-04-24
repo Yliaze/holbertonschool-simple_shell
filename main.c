@@ -8,9 +8,6 @@ int main(void)
 	char *quelquechose;
 	struct stat st;
 
-	env = _gentenv("PATH");
-	quelquechose = strdup(env);
-
 	while (getline(&line, &len, stdin) > 0)
 	{
 		line = clear_line(line);
@@ -26,6 +23,8 @@ int main(void)
 		}
 		else
 		{
+			env = _gentenv("PATH");
+			quelquechose = strdup(env);
 			av[0] = _which(quelquechose, av[0]);
 			if (av[0] != NULL)
 			{
