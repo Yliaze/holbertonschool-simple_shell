@@ -37,18 +37,17 @@ char *_which(char *path, char *cmd)
 	int nb = 0, i;
 	struct stat st;
 	char *buff = NULL, COLUMN[] = ":";
-
+	if (path == NULL || strcmp(path, "") == 0)
+	{
+		return (NULL);
+	}
 	nb = nb_token(path, COLUMN);
 	buff = strtok(path, COLUMN);
 
 	for (i = 0; i < nb; i++)
 	{
 		path = _strcat(buff, cmd);
-		if (path == NULL)
-		{
 
-			return (NULL);
-		}
 		if (stat(path, &st) == 0)
 		{
 			return (path);
@@ -56,6 +55,5 @@ char *_which(char *path, char *cmd)
 		free(path);
 		buff = strtok(NULL, COLUMN);
 	}
-	printf("%s: not found\n", cmd);
 	return (NULL);
 }

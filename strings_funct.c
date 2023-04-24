@@ -23,6 +23,18 @@ char *_strcat(char *s1, char *s2)
     return result;
 }
 
+
+int string_size(char *str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		i++;
+	}
+		return (i + 1);
+}
+
 /**
  * _strcpy - Copies a string
  * @dest: The destination string

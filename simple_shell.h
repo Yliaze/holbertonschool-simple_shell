@@ -19,6 +19,7 @@ int nb_token(char *str, char *delims);
 char *_gentenv(const char *name);
 char *_which(char *path, char *cmd);
 void _exec(char **av);
+int string_size(char *str);
 
 
 #endif
