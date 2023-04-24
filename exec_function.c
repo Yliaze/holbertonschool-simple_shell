@@ -1,5 +1,10 @@
 #include "simple_shell.h"
 
+/**
+ * _exec - Executes a command
+ * @av: The command and its arguments as an array of strings
+ * Return: Nothing
+ */
 void _exec(char **av)
 {
 	int child_pid, i = 0, status;
@@ -15,5 +20,6 @@ void _exec(char **av)
 	else
 	{
 		wait(&status);
+		free(av[0]);
 	}
 }

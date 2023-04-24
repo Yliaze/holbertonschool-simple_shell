@@ -1,39 +1,51 @@
 #include "simple_shell.h"
 
+/**
+ * _gentenv - Retrieves the value of an environment variable
+ * @name: The name of the variable to retrieve
+ * Return: A pointer to the value of the variable,
+ * or NULL if the variable is not found
+ */
 char *_gentenv(const char *name)
 {
-	char 
+	int i;
 	for (int i = 0; environ[i]; i++)
 	{
 		if (strncmp(environ[i], name, 4) == 0)
 		{
-			strtok
+			strtok(environ[i], "=");
+			environ[i] = strtok(NULL, "=");
 			return (environ[i]);
 		}
 	}
 	return (0);
 }
 
+/**
+ * _which - Searches for the location of a command in the system's PATH
+ * @path: The PATH environment variable
+ * @cmd: The command to search for
+ * Return: A pointer to a string containing the full path to the command,
+ * or NULL if the command is not found
+ */
 char *_which(char *path, char *cmd)
 {
 	int nb = 0, i;
 	struct stat st;
 	char *path_and_cmd = NULL, *buff = NULL, COLUMN[] = ":";
-
-	path_and_cmd = strdup(path);
-	nb = nb_token(buff, COLUMN);
-	buff = strtok(path_and_cmd, COLUMN);
+	
+	nb = nb_token(path, COLUMN);
+	buff = strtok(path, COLUMN);
 
 	for (i = 0; i < nb; i++)
 	{
-		path_and_cmd = _strcat(buff, cmd);
-		if (stat(path_and_cmd, &st) == 0)
+		path = _strcat(buff, cmd);
+		if (stat(path, &st) == 0)
 		{
-			free (buff);
-			return (path_and_cmd);
+			return (path);
 		}
+		free(path);
 		buff = strtok(NULL, COLUMN);
 	}
-
 	return (NULL);
 }

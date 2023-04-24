@@ -1,8 +1,9 @@
 #include "simple_shell.h"
 /**
- * clear_line - remove the new line at the end of a string
- * @str: the string to clear
- * Return: the string without '\n'
+ * clear_line - Removes trailing newline character
+ * from a string
+ * @str: The string to modify
+ * Return: A pointer to the modified string
  */
 char *clear_line(char *str)
 {
@@ -18,10 +19,10 @@ char *clear_line(char *str)
 }
 
 /**
- * nb_token - count the number of token
- * @str: the string
- * @delims: separator of each tokens
- * Return: the number of token
+ * nb_token - Counts the number of tokens in a string
+ * @str: The string to count tokens in
+ * @delims: A string containing the delimiters
+ * Return: The number of tokens in the string
  */
 int nb_token(char *str, char *delims)
 {

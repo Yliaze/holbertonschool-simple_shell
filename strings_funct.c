@@ -1,41 +1,33 @@
 #include "simple_shell.h"
 
 /**
- * _strcpy - copy a string
- * @src: point to strng to copy
- * @dest: the buffur contains the copy
- * Return: the 2nd buffer
+ * _strcat - Concatenates two strings
+ * @s1: The first string
+ * @s2: The second string
+ * Return: A pointer to the resulting string
  */
 char *_strcat(char *s1, char *s2)
 {
-	char *new_str;
-	int i = 0, y = 0;
-
-	new_str = calloc (sizeof(s1),  sizeof(s2) + 2);
-		if(!new_str)
-		{
-			printf("je sais pas faire un malloc \n");
-			return (0);
-		}
-	while (s1[i])
-	{
-		new_str[y] = s1[i];
-		i++;
-		y++;
-	}
-	i = 0;
-	new_str[y] = '/';
-	y++;
-	while (s2[i])
-	{
-		new_str[y] = s2[i];
-		i++;
-		y++;
-	}
-	new_str[y] = '\0';
-	return (new_str);
+	size_t len_s1 = strlen(s1);
+    size_t len_s2 = strlen(s2);
+    size_t len_separator = sizeof(char);
+	
+    char *result = calloc(len_s1 + len_s2 + len_separator + 1, sizeof(char));
+    if (result == NULL) {
+        exit(1);
+    }
+    strcpy(result, s1);
+    strcat(result, "/");
+    strcat(result, s2);
+    return result;
 }
 
+/**
+ * _strcpy - Copies a string
+ * @dest: The destination string
+ * @src: The source string
+ * Return: A pointer to the destination string
+ */
 char *_strcpy(char *dest, char *src)
 {
 	int i = 0;
@@ -51,11 +43,11 @@ char *_strcpy(char *dest, char *src)
 }
 
 /**
- * cut_string - split a string at each delimiters
- * @str: the string
- * @delims: separator of each tokens
- * @nb_token: the number of token
- * Return: array of strings
+ * cut_string - Splits a string into tokens using a
+ * set of delimiters
+ * @str: The string to split
+ * @delims: A string containing the delimiters
+ * @av: An array of strings to store the tokens
  */
 void cut_string(char *str, char *delims, char **av)
 {
