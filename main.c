@@ -17,7 +17,8 @@ int main(int argc, char **argv)
 		if (a)
 		{
 			av[0] = strtok(line, delims);
-			stock_av = malloc(sizeof(av[0]));
+			path_size = string_size(av[0]);
+			stock_av = malloc(path_size + 1);
 			stock_av = strcpy(stock_av, av[0]);
 
 			for (i = 1; i < a; i++)
