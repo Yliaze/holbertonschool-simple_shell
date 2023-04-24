@@ -9,7 +9,7 @@
 char *_gentenv(const char *name)
 {
 	int i;
-	for (int i = 0; environ[i]; i++)
+	for (i = 0; environ[i]; i++)
 	{
 		if (strncmp(environ[i], name, 4) == 0)
 		{
@@ -32,7 +32,7 @@ char *_which(char *path, char *cmd)
 {
 	int nb = 0, i;
 	struct stat st;
-	char *path_and_cmd = NULL, *buff = NULL, COLUMN[] = ":";
+	char *buff = NULL, COLUMN[] = ":";
 	
 	nb = nb_token(path, COLUMN);
 	buff = strtok(path, COLUMN);
