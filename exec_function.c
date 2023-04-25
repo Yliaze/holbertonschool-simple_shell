@@ -12,7 +12,7 @@ void _exec(char **av)
 	child_pid = fork();
 
 	if (child_pid == -1)
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 
 	else if (child_pid == 0)
 		execve(av[0], av, environ);
@@ -21,4 +21,11 @@ void _exec(char **av)
 	{
 		wait(&status);
 	}
+}
+int error(char *program, char *cmd, char *env)
+{
+	fprintf(stderr, "%s: 1: %s: not found\n", program, cmd);
+	if (env)
+		free(cmd);
+	return (127);
 }
