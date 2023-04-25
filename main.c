@@ -2,8 +2,8 @@
 
 int main(int __attribute__((unused)) argc, char **argv)
 {
-	char delims[] = " \n", *line = NULL, *env;
-	int a = 0, i = 0, path_size, exist = 0;
+	char delims[] = " ", *line = NULL, *env;
+	int a = 0, i = 0, path_size, exist = 1;
 	size_t len = 0;
 	char *quelquechose = NULL;
 	struct stat st;
@@ -14,11 +14,7 @@ int main(int __attribute__((unused)) argc, char **argv)
 		char *av[1024] = {NULL};
 
 		line = clear_line(line);
-		if (strcmp(line, "exit") == 0)
-		{
-			free(line);
-			exit(2);
-		}
+		__exit(line, exist);
 		a = nb_token(line, delims);
 		if (a)
 		{

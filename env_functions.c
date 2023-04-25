@@ -13,13 +13,17 @@ char *_gentenv(const char *name)
 	if (environ)
 	{
 		for (i = 0; environ[i]; i++)
-		{
+		{			
+			if (strncmp(environ[i], "PATH1", 5) == 0)
+				exit (127);
+
 			if (strncmp(environ[i], name, 5) == 0)
 			{
 				environ[i] = strtok(environ[i], "=");
 				environ[i] = strtok(NULL, "=");
 				return (environ[i]);
 			}
+
 		}
 	}
 	return (NULL);

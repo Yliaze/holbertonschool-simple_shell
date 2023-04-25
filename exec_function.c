@@ -28,5 +28,16 @@ int error(char *program, char *cmd, char *env, char *line)
 	if (env)
 		free(cmd);
 	free(line);
-	exit (127);
+	exit(127);
+}
+
+int __exit(char *line, int exist)
+{
+	if (strcmp(line, "exit") == 0)
+	{
+		free(line);
+		if (!exist)
+			exit(0);
+		exit(2);
+	}
 }

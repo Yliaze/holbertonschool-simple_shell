@@ -30,7 +30,7 @@ int nb_token(char *str, char *delims)
 
 	if (!str)
 		return (0);
-	
+
 	while (delims[y])
 	{
 		if(delims[y] != str[0])
@@ -44,7 +44,7 @@ int nb_token(char *str, char *delims)
 		while (delims[y])
 		{
 			if (str[i] == delims[y] && str[i + 1] != delims[y] && str[i + 1] != '\0')
-			nb_token++; 
+			nb_token++;
 
 			y++;
 		}
