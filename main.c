@@ -15,7 +15,10 @@ int main(int __attribute__((unused)) argc, char **argv)
 
 		line = clear_line(line);
 		if (strcmp(line, "exit") == 0)
+		{
+			free(line);
 			exit(0);
+		}
 		a = nb_token(line, delims);
 		if (a)
 		{
@@ -43,7 +46,7 @@ int main(int __attribute__((unused)) argc, char **argv)
 				free(quelquechose);
 			}
 			if (!exist)
-				error(argv[0], av[0], env);
+				error(argv[0], av[0], env, line);
 		}
 	}
 	free(line);

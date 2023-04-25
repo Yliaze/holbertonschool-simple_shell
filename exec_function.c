@@ -22,10 +22,11 @@ void _exec(char **av)
 		wait(&status);
 	}
 }
-int error(char *program, char *cmd, char *env)
+int error(char *program, char *cmd, char *env, char *line)
 {
 	fprintf(stderr, "%s: 1: %s: not found\n", program, cmd);
 	if (env)
 		free(cmd);
+	free(line);
 	exit (127);
 }
