@@ -32,11 +32,13 @@ int string_size(char *str)
 {
 	int i = 0;
 
+	if(!str || strcmp(str, "") == 0)
+		return (0);
 	while (str[i])
 	{
 		i++;
 	}
-		return (i + 1);
+	return (i + 1);
 }
 
 /**
