@@ -17,7 +17,7 @@ int main(int __attribute__((unused)) argc, char **argv)
 		if (strcmp(line, "exit") == 0)
 		{
 			free(line);
-			exit(0);
+			exit(2);
 		}
 		a = nb_token(line, delims);
 		if (a)
