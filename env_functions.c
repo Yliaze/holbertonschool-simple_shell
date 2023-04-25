@@ -14,7 +14,7 @@ char *_gentenv(const char *name)
 	{
 		for (i = 0; environ[i]; i++)
 		{
-			if (strncmp(environ[i], name, 4) == 0)
+			if (strncmp(environ[i], name, 5) == 0)
 			{
 				environ[i] = strtok(environ[i], "=");
 				environ[i] = strtok(NULL, "=");
@@ -32,14 +32,19 @@ char *_gentenv(const char *name)
  * Return: A pointer to a string containing the full path to the command,
  * or NULL if the command is not found
  */
-char *_which(char *path, char *cmd)
+char *_which(char *path, char *cmd, int *exist)
 {
 	int nb = 0, i;
 	struct stat st;
-	char *buff = NULL, COLUMN[] = ":";
+	char *buff = NULL, COLUMN[] = ":", *tmp;
+
+	tmp = malloc (string_size(cmd));
+	strcpy(tmp, cmd);
+	*exist = 0;
+
 	if (path == NULL || strcmp(path, "") == 0)
 	{
-		return (NULL);
+		return (tmp);
 	}
 	nb = nb_token(path, COLUMN);
 	buff = strtok(path, COLUMN);
@@ -50,10 +55,11 @@ char *_which(char *path, char *cmd)
 
 		if (stat(path, &st) == 0)
 		{
+			*exist = 1;
 			return (path);
 		}
 		free(path);
 		buff = strtok(NULL, COLUMN);
 	}
-	return (NULL);
+	return (tmp);
 }

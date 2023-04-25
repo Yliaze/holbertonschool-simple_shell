@@ -23,7 +23,11 @@ char *_strcat(char *s1, char *s2)
     return result;
 }
 
-
+/**
+ * string_size - Calculates the size of a string, including the null byte
+ * @str: The string to calculate the size of
+ * Return: The size of the string, including the null byte
+ */
 int string_size(char *str)
 {
 	int i = 0;

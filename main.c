@@ -3,12 +3,12 @@
 int main(int argc, char **argv)
 {
 	char delims[] = " ", *line = NULL, *env, *av[1024] = {NULL}, *stock_av;
-	int a = 0, i = 0, path_size;
+	int a = 0, i = 0, path_size, exist;
 	size_t len = 0;
 	char *quelquechose = NULL;
 	struct stat st;
 
-	env = _gentenv("PATH");
+	env = _gentenv("PATH=");
 	while (getline(&line, &len, stdin) > 0)
 	{
 		line = clear_line(line);
@@ -35,19 +35,19 @@ int main(int argc, char **argv)
 
 				quelquechose = malloc(path_size + 1); 
 				quelquechose = strcpy(quelquechose, env);
-				av[0] = _which(quelquechose, av[0]);
-				if (av[0] != NULL)
+				av[0] = _which(quelquechose, av[0], &exist);
+				if (exist)
 				{
 					_exec(av);
-					free(av[0]);
 				}
 				else
 				{
-					printf("%s: %d: %s: not found\n", argv[0], argc, stock_av);
-				}
+					fprintf(stderr, "%s: 1: %s: not found\n", argv[0], av[0]);
+				}	
+				free (quelquechose);
+				free(av[0]);
 			}		
 			free(stock_av);
-			free (quelquechose);
 		}
 	}
 	free(line);

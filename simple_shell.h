@@ -17,9 +17,9 @@ char *_strcat(char *s1, char *s2);
 char *clear_line(char *str);
 int nb_token(char *str, char *delims);
 char *_gentenv(const char *name);
-char *_which(char *path, char *cmd);
+char *_which(char *path, char *cmd, int *exist);
 void _exec(char **av);
 int string_size(char *str);
-
+void print_error(int argc, char **argv, char **av);
 
 #endif
