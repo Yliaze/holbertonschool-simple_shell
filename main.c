@@ -1,6 +1,6 @@
 #include "simple_shell.h"
 
-int main(int argc, char **argv)
+int main(int __attribute__ ((unused)) argc, char **argv)
 {
 	char delims[] = " ", *line = NULL, *env, *av[1024] = {NULL}, *stock_av;
 	int a = 0, i = 0, path_size, exist;

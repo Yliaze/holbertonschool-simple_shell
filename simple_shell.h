@@ -20,6 +20,5 @@ char *_gentenv(const char *name);
 char *_which(char *path, char *cmd, int *exist);
 void _exec(char **av);
 int string_size(char *str);
-void print_error(int argc, char **argv, char **av);
 
 #endif

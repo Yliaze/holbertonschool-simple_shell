@@ -56,6 +56,7 @@ char *_which(char *path, char *cmd, int *exist)
 		if (stat(path, &st) == 0)
 		{
 			*exist = 1;
+			free(tmp);
 			return (path);
 		}
 		free(path);
