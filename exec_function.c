@@ -40,4 +40,5 @@ int __exit(char *line, int exist)
 			exit(0);
 		exit(2);
 	}
+	return (0);
 }
