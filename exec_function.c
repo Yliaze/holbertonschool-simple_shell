@@ -27,5 +27,5 @@ int error(char *program, char *cmd, char *env)
 	fprintf(stderr, "%s: 1: %s: not found\n", program, cmd);
 	if (env)
 		free(cmd);
-	return (127);
+	exit (127);
 }
