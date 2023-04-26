@@ -9,18 +9,20 @@
 char *_strcat(char *s1, char *s2)
 {
 	size_t len_s1 = strlen(s1);
-    size_t len_s2 = strlen(s2);
-    size_t len_separator = sizeof(char);
-	
-    char *result = calloc(len_s1 + len_s2 + len_separator + 1, sizeof(char));
-    if (result == NULL) {
-        exit(1);
-    }
+	size_t len_s2 = strlen(s2);
+	size_t len_separator = sizeof(char);
 
-    strcpy(result, s1);
-    strcat(result, "/");
-    strcat(result, s2);
-    return result;
+	char *result = calloc(len_s1 + len_s2 + len_separator + 1, sizeof(char));
+
+	if (result == NULL)
+	{
+		exit(1);
+	}
+
+	strcpy(result, s1);
+	strcat(result, "/");
+	strcat(result, s2);
+	return (result);
 }
 
 /**
@@ -32,7 +34,7 @@ int string_size(char *str)
 {
 	int i = 0;
 
-	if(!str || strcmp(str, "") == 0)
+	if (!str || strcmp(str, "") == 0)
 		return (0);
 	while (str[i])
 	{

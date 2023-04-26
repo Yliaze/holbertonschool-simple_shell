@@ -33,7 +33,7 @@ int nb_token(char *str, char *delims)
 
 	while (delims[y])
 	{
-		if(delims[y] != str[0])
+		if (delims[y] != str[0])
 			nb_token = 1;
 		y++;
 	}

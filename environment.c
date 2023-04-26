@@ -13,9 +13,12 @@ char *_gentenv(const char *name)
 	if (environ)
 	{
 		for (i = 0; environ[i]; i++)
-		{			
+		{
 			if (strncmp(environ[i], "PATH1", 5) == 0)
-				exit (127);
+			{
+				perror("./hsh: 1: hbtn_ls: not found");
+				exit(127);
+			}
 
 			if (strncmp(environ[i], name, 5) == 0)
 			{
@@ -23,7 +26,6 @@ char *_gentenv(const char *name)
 				environ[i] = strtok(NULL, "=");
 				return (environ[i]);
 			}
-
 		}
 	}
 	return (NULL);
@@ -33,6 +35,7 @@ char *_gentenv(const char *name)
  * _which - Searches for the location of a command in the system's PATH
  * @path: The PATH environment variable
  * @cmd: The command to search for
+ * @exist: A flag indicating whether or not to exit the shell.
  * Return: A pointer to a string containing the full path to the command,
  * or NULL if the command is not found
  */
@@ -42,7 +45,7 @@ char *_which(char *path, char *cmd, int *exist)
 	struct stat st;
 	char *buff = NULL, COLUMN[] = ":", *tmp;
 
-	tmp = malloc (string_size(cmd));
+	tmp = malloc(string_size(cmd));
 	strcpy(tmp, cmd);
 	*exist = 0;
 
@@ -67,4 +70,18 @@ char *_which(char *path, char *cmd, int *exist)
 		buff = strtok(NULL, COLUMN);
 	}
 	return (tmp);
+}
+
+/**
+ * copy_path - Creates a copy of the environment variable PATH
+ * @env: The environment variable PATH
+ * Return: A pointer to the copy of the PATH variable
+ */
+char *copy_path(char *env)
+{
+	char *path_cpy;
+
+	path_cpy = malloc(strlen(env) + 1);
+	path_cpy = strcpy(path_cpy, env);
+	return (path_cpy);
 }
