@@ -19,7 +19,7 @@ int main(int __attribute__((unused)) argc, char **argv)
 		char *av[1024] = {NULL};
 
 		line = clear_line(line);
-		__exit(line), _printenv(line, &exist);
+		__exit(line);
 		token = nb_token(line, delims);
 		if (token)
 		{
@@ -27,6 +27,7 @@ int main(int __attribute__((unused)) argc, char **argv)
 			av[0] = strtok(line, delims);
 			for (i = 1; i < token; i++)
 				av[i] = strtok(NULL, delims);
+			_printenv(line, &exist);
 			if (stat(av[0], &st) == 0)
 				_exec(av, &exist);
 			else if (env && !exist)
