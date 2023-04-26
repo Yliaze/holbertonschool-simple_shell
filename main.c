@@ -8,7 +8,7 @@
 int main(int __attribute__((unused)) argc, char **argv)
 {
 	char delims[] = " ", *line = NULL, *env;
-	int a = 0, i = 0, exist = 1;
+	int token = 0, i = 0, exist = 1;
 	size_t len = 0;
 	char *path_cpy = NULL;
 	struct stat st;
@@ -20,12 +20,12 @@ int main(int __attribute__((unused)) argc, char **argv)
 
 		line = clear_line(line);
 		__exit(line);
-		a = nb_token(line, delims);
-		if (a)
+		token = nb_token(line, delims);
+		if (token)
 		{
 			exist = 0;
 			av[0] = strtok(line, delims);
-			for (i = 1; i < a; i++)
+			for (i = 1; i < token; i++)
 				av[i] = strtok(NULL, delims);
 			if (stat(av[0], &st) == 0)
 			{
