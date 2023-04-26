@@ -1,11 +1,16 @@
 #include "simple_shell.h"
-
+/**
+ * main - Entry point
+ * @argc: The number of command-line arguments
+ * @argv: An array of pointers to the arguments
+ *
+ * Return: Always 0 (success)
+ */
 int main(int __attribute__((unused)) argc, char **argv)
 {
-	char delims[] = " ", *line = NULL, *env;
-	int a = 0, i = 0, path_size, exist = 1;
+	char delims[] = " ", *line = NULL, *env, *path_cpy = NULL;
+	int token = 0, i = 0, exist = 1;
 	size_t len = 0;
-	char *quelquechose = NULL;
 	struct stat st;
 
 	env = _gentenv("PATH=");
@@ -14,32 +19,23 @@ int main(int __attribute__((unused)) argc, char **argv)
 		char *av[1024] = {NULL};
 
 		line = clear_line(line);
-		__exit(line, exist);
-		a = nb_token(line, delims);
-		if (a)
+		__exit(line, exist), _env(line);
+		token = nb_token(line, delims);
+		if (token)
 		{
-
 			exist = 0;
 			av[0] = strtok(line, delims);
-			for (i = 1; i < a; i++)
+			for (i = 1; i < token; i++)
 				av[i] = strtok(NULL, delims);
 			if (stat(av[0], &st) == 0)
-			{
-				exist = 1;
-				_exec(av);
-			}
+				_exec(av, &exist);
 			else if (env && !exist)
 			{
-				path_size = string_size(env);
-				quelquechose = malloc(path_size + 1);
-				quelquechose = strcpy(quelquechose, env);
-				av[0] = _which(quelquechose, av[0], &exist);
+				path_cpy = copy_path(env);
+				av[0] = _which(path_cpy, av[0], &exist);
 				if (exist)
-				{
-					_exec(av);
-					free(av[0]);
-				}
-				free(quelquechose);
+					_exec(av, &exist);
+				free(path_cpy);
 			}
 			if (!exist)
 				error(argv[0], av[0], env, line);
