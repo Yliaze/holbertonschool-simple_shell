@@ -19,7 +19,7 @@ int main(int __attribute__((unused)) argc, char **argv)
 		char *av[1024] = {NULL};
 
 		line = clear_line(line);
-		__exit(line);
+		__exit(line), _printenv(line, &exist);
 		token = nb_token(line, delims);
 		if (token)
 		{
@@ -28,10 +28,7 @@ int main(int __attribute__((unused)) argc, char **argv)
 			for (i = 1; i < token; i++)
 				av[i] = strtok(NULL, delims);
 			if (stat(av[0], &st) == 0)
-			{
-				exist = 1;
 				_exec(av, &exist);
-			}
 			else if (env && !exist)
 			{
 				path_cpy = copy_path(env);
@@ -41,7 +38,7 @@ int main(int __attribute__((unused)) argc, char **argv)
 				free(path_cpy);
 			}
 			if (!exist)
-				error(argv[0], av[0], env);
+				error(argv[0], av[0], env, line);
 		}
 	}
 	free(line);

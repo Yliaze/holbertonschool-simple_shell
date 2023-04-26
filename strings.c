@@ -26,24 +26,6 @@ char *_strcat(char *s1, char *s2)
 }
 
 /**
- * string_size - Calculates the size of a string, including the null byte
- * @str: The string to calculate the size of
- * Return: The size of the string, including the null byte
- */
-int string_size(char *str)
-{
-	int i = 0;
-
-	if (!str || strcmp(str, "") == 0)
-		return (0);
-	while (str[i])
-	{
-		i++;
-	}
-	return (i + 1);
-}
-
-/**
  * _strcpy - Copies a string
  * @dest: The destination string
  * @src: The source string
@@ -79,4 +61,22 @@ void cut_string(char *str, char *delims, char **av)
 	{
 		av[i] = strtok(NULL, delims);
 	}
+}
+
+/**
+ * string_size - Calculates the size of a string, including the null byte
+ * @str: The string to calculate the size of
+ * Return: The size of the string, including the null byte
+ */
+int string_size(char *str)
+{
+	int i = 0;
+
+	if (!str || strcmp(str, "") == 0)
+		return (0);
+	while (str[i])
+	{
+		i++;
+	}
+	return (i + 1);
 }

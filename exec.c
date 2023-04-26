@@ -3,7 +3,7 @@
 /**
  * _exec - Executes a command
  * @av: The command and its arguments as an array of strings
- *  * @exist: A flag indicating whether or not to exit the shell
+ * @exist: A flag indicating if a command was executed
  * Return: Nothing
  */
 void _exec(char **av, int *exist)
@@ -30,14 +30,16 @@ void _exec(char **av, int *exist)
  * @program: The name of the program
  * @cmd: The name of the command that was not found
  * @env: The environment variable to be freed
+ * @line: The command line entered by the user
  * Return: void
  */
-int error(char *program, char *cmd, char *env)
+int error(char *program, char *cmd, char *env, char *line)
 {
 	fprintf(stderr, "%s: 1: %s: not found\n", program, cmd);
+	free(line);
 	if (env)
 		free(cmd);
-	return (127);
+	exit(127);
 }
 
 /**

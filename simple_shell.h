@@ -19,9 +19,10 @@ int nb_token(char *str, char *delims);
 char *_gentenv(const char *name);
 char *_which(char *path, char *cmd, int *exist);
 void _exec(char **av, int *exist);
-int string_size(char *str);
-int error(char *program, char *cmd, char *env);
+int error(char *program, char *cmd, char *env, char *line);
 int __exit(char *line);
 char *copy_path(char *env);
+void _printenv(char *line, int *exist);
+int string_size(char *str);
 
 #endif

@@ -35,7 +35,7 @@ char *_gentenv(const char *name)
  * _which - Searches for the location of a command in the system's PATH
  * @path: The PATH environment variable
  * @cmd: The command to search for
- * @exist: A flag indicating whether or not to exit the shell.
+ * @exist: A flag indicating if a command was executed
  * Return: A pointer to a string containing the full path to the command,
  * or NULL if the command is not found
  */
@@ -81,7 +81,26 @@ char *copy_path(char *env)
 {
 	char *path_cpy;
 
-	path_cpy = malloc(strlen(env) + 1);
+	path_cpy = malloc(string_size(env) + 1);
 	path_cpy = strcpy(path_cpy, env);
 	return (path_cpy);
+}
+/**
+ * _printenv - Prints the environment variables
+ * @line: The command line argument
+ * @exist: A flag indicating if a command was executed
+ */
+void _printenv(char *line, int *exist)
+{
+	int i = 0;
+
+	if ((strcmp(line, "env")) == 0)
+	{
+		while (environ[i])
+		{
+			printf("%s\n", environ[i]);
+			i++;
+		}
+		*exist = 1;
+	}
 }
