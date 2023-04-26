@@ -19,11 +19,13 @@ int main(int __attribute__((unused)) argc, char **argv)
 		char *av[1024] = {NULL};
 
 		line = clear_line(line);
-		__exit(line, exist), _env(line);
+		__exit(line);
+
 		token = nb_token(line, delims);
 		if (token)
 		{
 			exist = 0;
+			_env(line, &exist);
 			av[0] = strtok(line, delims);
 			for (i = 1; i < token; i++)
 				av[i] = strtok(NULL, delims);

@@ -44,23 +44,21 @@ int error(char *program, char *cmd, char *env, char *line)
 /**
  * __exit - Exits the shell when the user enters the "exit" command.
  * @line: The command line entered by the user.
- * @exist: A flag indicating whether or not to exit the shell.
  */
-void __exit(char *line, int exist)
+void __exit(char *line)
 {
 	if (strcmp(line, "exit") == 0)
 	{
 		free(line);
-		if (!exist)
-			exit(0);
 		exit(2);
 	}
 }
 /**
  * _env - Prints the environment variables
  * @line: The command line argument
+ * @exist: A flag indicating whether or not to exit the shell.
  */
-void _env(char *line)
+void _env(char *line, int *exist)
 {
 	int i = 0;
 
@@ -71,5 +69,7 @@ void _env(char *line)
 			printf("%s\n", environ[i]);
 			i++;
 		}
+		*exist = 1;
 	}
+
 }

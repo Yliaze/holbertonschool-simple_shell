@@ -21,7 +21,7 @@ char *_which(char *path, char *cmd, int *exist);
 void _exec(char **av, int *exist);
 int error(char *program, char *cmd, char *env, char *line);
 char *copy_path(char *env);
-void __exit(char *line, int exist);
-void _env(char *line);
+void __exit(char *line);
+void _env(char *line, int *exist);
 
 #endif
