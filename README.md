@@ -25,7 +25,7 @@ git clone https://github.com/Yliaze/holbertonschool-simple_shell.git
 gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 ```
     
-4.  Run the program by typing the following command:
+4.  Run the program by typing the following command: 
 ```c
 ./hsh
 ```

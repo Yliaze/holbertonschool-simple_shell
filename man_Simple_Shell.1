@@ -1,0 +1,92 @@
+.TH simple_shell 1 "April 2023" "Version 1.0" "User Commands"
+
+.SH NAME
+simple_shell
+
+.SH SYNOPSIS
+.B simple_shell - a simple UNIX command interpreter
+
+.SH DESCRIPTION
+simple_shell is a simple command interpreter that reads input from the user and executes commands.
+It provides a basic shell environment with a few built-in commands, as well as the ability to execute external programs.
+
+.SH COMMANDS
+The following commands are built into simple_shell:
+
+.TP
+.B ls
+List the contents of the current directory.
+
+.TP
+.B mkdir
+Create a new directory.
+
+.TP
+.B echo
+Display a message on the screen.
+
+.TP
+.B exit [status]
+Exits the shell with the given exit \fIstatus\fR.
+
+.SH OPTIONS & EXEMPLES
+
+You can then enter commands at the prompt:
+.TP
+.B prompt> ls -l
+List the contents of the current directory in long format.
+
+.TP
+.B prompt> mkdir newdir
+Create a new directory called newdir.
+
+.TP
+.B prompt> echo "Hello, Taieb!"
+Display the message "Hello, Taieb!" on the screen.
+
+.SH FILES
+.TP
+.B main.c
+This is the main function for the simple_shell.
+
+.TP
+.B simple_shell.h
+Contain includes and prototypes of all the simple_shell functions.
+
+.TP
+.B exec.c
+Contain functions for simple_shell executions and exits (_exec, error and __exit).
+
+.TP
+.B environments.cq
+Contain functions handeling the environment (_gentenv, _which, copy_path and _printenv).
+
+.TP 
+.B strings.c
+Contain functions handeling strings behaviors (_strcat, _strcpy, cut_string and string_size).
+
+.TP
+.B token.c
+Contain functions handeling tokens behaviors (clear_line and nb_token).
+
+.SH EXIT STATUS
+simple_shell returns an exit status of zero on success,
+and a non-zero status on failure.
+
+.SH AUTHOR
+simple_shell was written by Axel Malka and Benjamin Alazet.
+
+.SH BUGS
+No known bugs.
+
+.SH COPYRIGHT
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+.SH NOTES
+This man page only covers the basic functionality of simple_shell.
+For more information, see the project documentation or contact the authors.
+
+.SH HISTORY
+This simple_shell was created by Axel Malka and Benjamin Alazet
+as a project for their developer web training in April 2023.
