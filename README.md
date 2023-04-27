@@ -10,9 +10,9 @@ It is designed to replicate the basic functionalities of a Unix shell, such as t
 -   How to Use the Project
 -   Credits
 
-# Table of Contents
+# Flowchart
 
-![This is a flowchart of our Simple Shell](https://github.com/Yliaze/holbertonschool-simple_shell/blob/main/Simple%20Shell%20Flowchart.drawio.png?raw=true)
+![This is a flowchart of our Simple Shell](https://github.com/Yliaze/holbertonschool-simple_shell/blob/main/Simple%20Shell%20Flowchart.drawio.png?raw=true) 
 
 # How to Install and Run our Simple Shell
 
